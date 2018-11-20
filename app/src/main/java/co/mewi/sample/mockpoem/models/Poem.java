@@ -1,4 +1,4 @@
-package co.mewi.sample.mockpoem.net;
+package co.mewi.sample.mockpoem.models;
 
 public class Poem {
 

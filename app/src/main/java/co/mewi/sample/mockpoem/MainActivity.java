@@ -10,8 +10,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import co.mewi.sample.mockpoem.net.Injector;
 import co.mewi.sample.mockpoem.net.NetworkRequestManager;
-import co.mewi.sample.mockpoem.net.Poem;
+import co.mewi.sample.mockpoem.models.Poem;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -19,8 +20,8 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String FAIL = "FAILURE";
-    private static final String LOADING = "LOADING";
+    public static final String FAIL = "FAILURE";
+    public static final String LOADING = "LOADING";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +35,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ((TextView) findViewById(R.id.output)).setText(LOADING);
-                NetworkRequestManager.getInstance().getPoems(new Callback<List<Poem>>() {
+                NetworkRequestManager.getInstance(Injector.getUrl()).getPoems(new Callback<List<Poem>>() {
                     @Override
                     public void onResponse(Call<List<Poem>> call, Response<List<Poem>> response) {
-                        if (response.isSuccessful() && response != null && response.body() != null && response.body().size() > 0) {
+                        if (response.isSuccessful() && response != null &&
+                                response.body() != null && response.body().size() > 0) {
                             ((TextView) findViewById(R.id.output)).setText(response.body().get(0).content);
                         } else {
                             ((TextView) findViewById(R.id.output)).setText(FAIL);
