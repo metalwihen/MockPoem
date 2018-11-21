@@ -1,4 +1,4 @@
-package co.mewi.sample.mockpoem;
+package co.mewi.sample.mockpoem.mockwebutils;
 
 public class PoemistResponse {
 
